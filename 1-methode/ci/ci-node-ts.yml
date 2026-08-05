@@ -1,0 +1,42 @@
+# CI — gabarit du harnais (projet Node/TypeScript).
+#
+# Rôle : filet de sécurité APRÈS push, sur machine neutre. Attrape ce que le hook local ne
+# peut pas voir — fichier non commité, dépendance absente du lockfile, variable
+# d'environnement qui n'existe que sur le poste de dev.
+#
+# Ne déploie rien. Le déploiement est une autre surface (cf. skills/deploiement).
+#
+# À copier dans .github/workflows/ci.yml
+# À ADAPTER : version de Node, gestionnaire de paquets, commandes.
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      # `npm ci` (et non `npm install`) : échoue si le lockfile est désynchronisé du
+      # package.json — c'est précisément l'erreur qu'on veut attraper ici.
+      - name: Install dependencies
+        run: npm ci
+
+      - name: TypeScript (bloquant)
+        run: npx tsc --noEmit
+
+      # Non bloquant : le lint remonte du bruit hérité sur un projet existant. Le rendre
+      # bloquant d'emblée conduit à ignorer la CI en entier.
+      - name: ESLint (non bloquant)
+        run: npm run lint
+        continue-on-error: true

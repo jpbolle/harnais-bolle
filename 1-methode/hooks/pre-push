@@ -1,0 +1,31 @@
+#!/bin/sh
+# Hook pre-push — gabarit du harnais.
+#
+# Raison d'être : sur un projet où `git push` déclenche un déploiement en production et où
+# il n'existe pas de suite de tests, la compilation est la SEULE barrière automatique.
+#
+# Installation (à refaire sur CHAQUE machine — cette config n'est pas versionnable) :
+#   git config core.hooksPath harnais/hooks
+#   chmod +x harnais/hooks/pre-push
+#
+# Vérifier qu'il est actif :  git config core.hooksPath   → doit renvoyer "harnais/hooks"
+#
+# À ADAPTER : remplacer la commande ci-dessous par la vérification la plus rapide qui
+# attrape le plus d'erreurs sur ce projet (tsc, tests, linter typé…). Un hook qui ne
+# vérifie rien de sérieux est pire que pas de hook.
+
+CHECK_CMD="npx tsc --noEmit"
+CHECK_LABEL="TypeScript"
+
+echo "[harnais] Vérification $CHECK_LABEL avant push (prod)…"
+$CHECK_CMD
+STATUS=$?
+if [ $STATUS -ne 0 ]; then
+  echo ""
+  echo "[harnais] ❌ $CHECK_LABEL a échoué — push annulé (le build de production casserait)."
+  echo "[harnais]    Corrige les erreurs puis repushe."
+  echo "[harnais]    (--no-verify force le push : déconseillé, et jamais sans accord explicite.)"
+  exit $STATUS
+fi
+echo "[harnais] ✅ $CHECK_LABEL OK — push autorisé."
+exit 0

@@ -1,0 +1,22 @@
+{
+  "_commentaire": "Gabarit d'allowlist Claude Code — à copier dans .claude/settings.json du projet (versionné, donc partagé entre machines). Principe : autoriser sans confirmation ce qui est lecture seule ou strictement local et réversible ; mettre en 'ask' tout ce qui sort de la machine ou touche la production. Adapter les commandes au projet.",
+
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc:*)",
+      "Bash(npm run lint:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm install:*)",
+      "Bash(git status)",
+      "Bash(git log:*)",
+      "Bash(git diff:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(ls:*)",
+      "Bash(grep:*)"
+    ],
+    "ask": [
+      "Bash(git push:*)"
+    ]
+  }
+}
