@@ -18,6 +18,17 @@ vaut jamais pour le suivant.
 *Origine : interview 0-moi du 2026-08-05 (question B7) ; confirmait `AGENTS.md` KitSchool +
 `.claude/settings.json` (`git push` en `ask`).*
 
+**Vérifier que l'autre poste n'a pas avancé avant de proposer un push.**
+Le travail se fait sur deux machines (MacBook Pro et Mac Studio). Un dépôt propre en local
+ne dit **rien** de l'état du dépôt distant : un projet peut avoir progressé sur l'autre Mac
+depuis. Avant de proposer un push, faire un `git fetch` et regarder si le distant est en
+avance ; le cas échéant, le signaler et proposer de récupérer d'abord.
+Git refuse de lui-même un push qui écraserait du travail distant — mais compter sur ce
+refus, c'est découvrir la divergence au pire moment, après avoir annoncé que tout était
+prêt.
+*Origine : session du 2026-08-06 — push refusé sur `rectoVersIA-main`, le distant portait
+du travail fait sur l'autre poste.*
+
 **Ne jamais contourner un garde-fou.**
 Pas de `--no-verify` sur un hook pre-push sans accord explicite. Le hook existe parce qu'il
 n'y a pas de suite de tests : c'est la seule barrière automatique.
