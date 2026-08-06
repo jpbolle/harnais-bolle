@@ -66,8 +66,8 @@ toutes les autres.
 | Taille | Pour quoi | Ce qu'on installe |
 |---|---|---|
 | **S** | Prototype, script, expérience | `AGENTS.md` + mémoire |
-| **M** | App réelle sans données sensibles ni prod critique | S + `init.md` + skills + rituel de session |
-| **L** | App en prod, données personnelles, déploiement automatique | M + hook pre-push + CI + rollups mémoire + skill de déploiement |
+| **M** | App réelle sans données sensibles ni prod critique | S + `init.md` + `roadmap.md` + skills + rituel de session |
+| **L** | App en prod, données personnelles, déploiement automatique | M + plans validés + hook pre-push + CI + tests minimaux + rollups mémoire + skill de déploiement |
 
 KitSchool est en **L**. La plupart des projets sont en **M**.
 

@@ -43,6 +43,10 @@ Déclencheurs : « fin de session », « on arrête là », « clôture ».
 3. **Mettre à jour `init.md`** uniquement en cas de changement structurel : nouveau module
    ou route, convention modifiée, coordonnée technique changée, gotcha nouveau, module
    passé de « placeholder » à « livré ». Pas de journal de session dans `init.md`.
+   - **Question à se poser une fois par session** : ai-je écrit aujourd'hui du code de la
+     même forme qu'une fois déjà ? Si oui → **proposer** de l'inscrire dans §2 « Patterns
+     imposés », avec le chemin du fichier à recopier. C'est le seul moment où on s'en
+     souvient : demain, cette répétition sera invisible.
 4. **Rappels conditionnels** — ne garder que ceux qui existent dans ce projet :
    - Règles de sécurité de la base de données touchées ? → elles doivent être **déployées**
      (déploiement séparé, jamais automatique) **et** commitées.

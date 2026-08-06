@@ -10,12 +10,16 @@ mécaniquement de casser la prod.
 |---|---|---|
 | [`les-5-couches.md`](les-5-couches.md) | Le modèle : où vit quelle information et pourquoi | S |
 | [`memoire.md`](memoire.md) | La mémoire cross-sessions : structure, emplacement, pièges | S |
+| [`roadmap-et-plans.md`](roadmap-et-plans.md) | Où vit l'**intention** : `roadmap.md` et les plans validés | M |
 | [`garde-fous.md`](garde-fous.md) | Les vérifications qui ne dépendent pas de la bonne volonté de l'agent | L |
+| [`tests-minimaux.md`](tests-minimaux.md) | 5 à 10 tests sur les calculs vus par un humain — vérifier le **résultat**, pas la forme | L |
 | [`skills/session-ritual/`](skills/session-ritual/SKILL.md) | Rituel de début et de fin de session | M |
 | [`skills/deploiement/`](skills/deploiement/SKILL.md) | Le patron « N surfaces indépendantes » | M |
 | [`hooks/pre-push`](hooks/pre-push) | Hook git bloquant sur la compilation | L |
 | [`ci/ci-node-ts.yml`](ci/ci-node-ts.yml) | GitHub Actions : re-vérification sur machine neutre | L |
 | [`settings.json.example`](settings.json.example) | Allowlist de permissions Claude Code | M |
+| [`skills-externes.md`](skills-externes.md) | Les plugins installés hors du dépôt (`~/.claude/`) et comment les rejouer sur l'autre Mac | S |
+| [`sous-agents.md`](sous-agents.md) | Quand déléguer à un sous-agent, et comment le briefer | S |
 
 ## Comment s'en servir
 

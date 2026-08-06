@@ -8,6 +8,8 @@ instructions de remplissage (en `<!-- commentaires -->` à supprimer une fois re
 |---|---|---|
 | [`AGENTS.template.md`](AGENTS.template.md) | `AGENTS.md` à la racine (+ symlink `CLAUDE.md`) | 1 |
 | [`init.template.md`](init.template.md) | `init.md` à la racine | 2 |
+| [`roadmap.template.md`](roadmap.template.md) | `roadmap.md` à la racine (taille M et plus) | intention |
+| [`plan.template.md`](plan.template.md) | `harnais/plans/<date>-<sujet>.md` (taille L) | intention |
 | [`harnais-README.template.md`](harnais-README.template.md) | `harnais/README.md` | carte |
 
 ## Procédure automatique

@@ -65,8 +65,8 @@ Poser ces questions **par groupes**, pas toutes d'un coup. Écrire les réponses
 | Taille | Critère | Contenu |
 |---|---|---|
 | **S** | Prototype, script, pas d'utilisateur réel | `AGENTS.md` + mémoire |
-| **M** | Application réelle, pas de donnée sensible ni de déploiement automatique | S + `init.md` + skills + rituel |
-| **L** | Utilisateurs réels **ou** données personnelles **ou** déploiement automatique | M + hook + CI + rollups + skill de déploiement |
+| **M** | Application réelle, pas de donnée sensible ni de déploiement automatique | S + `init.md` + `roadmap.md` + skills + rituel |
+| **L** | Utilisateurs réels **ou** données personnelles **ou** déploiement automatique | M + `harnais/plans/` + hook + CI + tests minimaux + rollups + skill de déploiement |
 
 Une seule réponse « oui » aux questions 4, 5 ou 7 suffit à imposer **L**.
 
@@ -103,8 +103,9 @@ Cocher ce qui s'applique réellement :
 MATRICE=~/Documents/harnais
 PROJET=$(pwd)
 
-cp $MATRICE/3-matrice/AGENTS.template.md $PROJET/AGENTS.md
-cp $MATRICE/3-matrice/init.template.md   $PROJET/init.md    # taille M et plus
+cp $MATRICE/3-matrice/AGENTS.template.md  $PROJET/AGENTS.md
+cp $MATRICE/3-matrice/init.template.md    $PROJET/init.md      # taille M et plus
+cp $MATRICE/3-matrice/roadmap.template.md $PROJET/roadmap.md   # taille M et plus
 ln -s AGENTS.md $PROJET/CLAUDE.md
 
 mkdir -p $PROJET/harnais/memoire/archive
@@ -116,7 +117,8 @@ cp -r $MATRICE/1-methode/skills/*           $PROJET/.claude/skills/
 cp $MATRICE/1-methode/settings.json.example $PROJET/.claude/settings.json
 
 # Taille L uniquement
-mkdir -p $PROJET/harnais/hooks $PROJET/.github/workflows
+mkdir -p $PROJET/harnais/hooks $PROJET/harnais/plans $PROJET/.github/workflows
+cp $MATRICE/3-matrice/plan.template.md $PROJET/harnais/plans/_gabarit.md
 cp $MATRICE/1-methode/hooks/pre-push $PROJET/harnais/hooks/pre-push
 chmod +x $PROJET/harnais/hooks/pre-push
 git config core.hooksPath harnais/hooks
@@ -130,7 +132,10 @@ Puis, **fichier par fichier** :
 4. adapter les deux `SKILL.md` copiés (noms, commandes, surfaces réelles) — un rituel qui
    mentionne une étape inexistante se fait ignorer en entier ;
 5. adapter la commande du hook à celle de la question 6 ;
-6. créer `harnais/memoire/MEMORY.md` avec un en-tête et l'index vide.
+6. créer `harnais/memoire/MEMORY.md` avec un en-tête et l'index vide ;
+7. remplir `roadmap.md` avec les réponses à la question 1 — **et demander à l'utilisateur
+   ce qu'il a déjà écarté**. C'est le seul moment où il y pense ; après, cette information
+   ne s'écrit jamais.
 
 Noter dans `harnais/README.md` la **version de la matrice** (lire `$MATRICE/VERSION`) et
 la date.

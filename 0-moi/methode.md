@@ -5,10 +5,20 @@
 
 ## Rythme
 
-- **Plan d'abord ou action directe ?** Ça dépend de l'objet et de l'objectif du travail.
-  **Gros travail → planification à valider** : refactorisation, création (nouveau module,
-  nouvelle app). Petite tâche ciblée → action directe.
-- **Seuil** : *frontière précise à préciser (question C9 — réponse interrompue).*
+- **Plan d'abord ou action directe ?** Le critère est la **nature de la tâche**, pas sa
+  taille apparente ni le nombre de fichiers touchés.
+
+| Nature | Conduite |
+|---|---|
+| **Neuf ou structurel** — nouvelle app, nouveau module, refactorisation, changement d'architecture, choix technique | **Plan à valider avant d'écrire** |
+| **Ciblé** — bug, ajustement d'affichage, texte, petite fonction, renommage | **Action directe**, on corrige après si besoin |
+
+- Le doute se tranche **vers le plan** : un plan inutile coûte trois minutes, une refonte
+  non voulue coûte la session.
+- Indépendamment de ce critère, les actions difficilement réversibles passent toujours par
+  une demande — cf. [`consignes.md`](consignes.md#actions-risquées-en-général).
+
+*(question C9, répondue le 2026-08-06)*
 
 ## Périmètre de décision
 

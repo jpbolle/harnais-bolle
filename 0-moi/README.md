@@ -28,8 +28,14 @@ Deux façons de le rendre disponible dans un projet, au choix :
    au début des sessions importantes.
 
 La solution 1 est plus confortable au quotidien ; la 2 garantit qu'il n'existe qu'une
-seule version. En pratique : 1 pour le confort, avec re-synchronisation depuis ce dépôt
-dès que `consignes.md` change.
+seule version.
+
+**Choix retenu le 2026-08-06 : la solution 2.** `~/.claude/CLAUDE.md` existe sur le
+MacBook Pro, mais ne contient **qu'un renvoi** vers ce dossier plus un rappel des interdits
+les plus coûteux — aucune copie de contenu. À refaire à l'identique sur le Mac Studio.
+Conséquence : une modification de `consignes.md` est active partout sans re-synchronisation ;
+en contrepartie, l'agent doit pouvoir **ouvrir ce dépôt** — s'il ne le peut pas, il doit le
+dire au lieu de deviner.
 
 > ⚠️ Point de vigilance à deux machines : la mémoire automatique de Claude Code vit dans
 > `~/.claude/projects/<chemin-du-dossier>/memory/` — un chemin **dérivé du nom du dossier

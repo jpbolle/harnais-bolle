@@ -58,6 +58,12 @@ la plus rapide qui attrape le plus d'erreurs :
 |---|---|
 | TypeScript | `npx tsc --noEmit` |
 | JS + tests | `npm test` |
+| TypeScript + tests minimaux | `npx tsc --noEmit && npm test` |
+
+> **La compilation ne vérifie que la forme.** Elle répond à « est-ce bien un nombre ? »,
+> jamais à « est-ce le bon ? ». Sur un projet où un calcul faux atterrit dans un bulletin
+> sans provoquer la moindre erreur visible, elle ne suffit pas : voir
+> [`tests-minimaux.md`](tests-minimaux.md).
 | Python | `ruff check . && mypy .` |
 | Rien de tout ça | ne pas installer de hook plutôt qu'un hook creux |
 

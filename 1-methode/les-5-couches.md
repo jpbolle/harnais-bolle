@@ -40,10 +40,17 @@ Avant d'écrire une information dans un projet, se poser les questions **dans ce
 2. **Est-ce vrai de l'architecture et stable au mois ?** → couche 2 (`init.md`).
 3. **Est-ce une procédure qu'on a déjà exécutée au moins deux fois, avec des étapes
    faciles à oublier ?** → couche 4 (un skill).
-4. **Sinon** → couche 3 (mémoire). C'est le défaut : l'actualité, les décisions, les TODOs.
+4. **Est-ce ce qu'on **va** faire, et pas ce qui est ?** → hors couches :
+   [`roadmap-et-plans.md`](roadmap-et-plans.md). Test rapide : si c'est faisable en une
+   session, ce n'est pas de la roadmap, c'est un TODO de mémoire.
+5. **Sinon** → couche 3 (mémoire). C'est le défaut : l'actualité, les décisions, les TODOs.
 
 La couche 5 ne se décide pas au cas par cas : elle s'installe une fois au démarrage du
 projet.
+
+**Les cinq couches décrivent toutes ce qui *est*.** L'intention — ce qu'on va faire, et ce
+qu'on a décidé de ne pas faire — n'a pas de couche : elle vit dans `roadmap.md` et dans
+`harnais/plans/`, décrits par [`roadmap-et-plans.md`](roadmap-et-plans.md).
 
 ## Pourquoi ces emplacements-là
 
@@ -74,5 +81,17 @@ le reste. Un lecteur qui arrive sur le projet ne doit avoir qu'un seul endroit o
   appartient à un rollup.
 - **Un nouveau skill se justifie à partir de la deuxième exécution** d'une procédure aux
   étapes oubliables. Avant, c'est de la documentation.
+- **Un pattern s'écrit à la deuxième occurrence, et c'est l'agent qui le propose.** Quand
+  il vient d'écrire pour la deuxième fois du code de la même forme (même découpage, même
+  enchaînement de fichiers), il le signale et propose de l'inscrire dans `init.md` §2
+  « Patterns imposés », avec le chemin du fichier à recopier. L'utilisateur valide ou non.
+  - **Skill ou pattern ?** Une *procédure* qui se répète (des étapes à exécuter, dans
+    l'ordre, faciles à oublier) → un skill. Une *forme de code* qui se répète (comment on
+    structure ce type d'écran, de service, de formulaire) → un pattern.
+  - Sans cette règle, le tableau des patterns reste vide : personne ne pense
+    spontanément à écrire ce qu'il vient de faire pour la deuxième fois. Et un tableau
+    vide donne un agent qui réinvente une forme légèrement différente à chaque
+    fonctionnalité — au bout de six mois, cinq façons de faire la même chose coexistent
+    et plus personne ne sait laquelle fait foi.
 - **Le `README.md` du harnais est mis à jour quand une pièce change** (nouveau skill,
   nouveau garde-fou, changement de structure mémoire), pas au fil des sessions.

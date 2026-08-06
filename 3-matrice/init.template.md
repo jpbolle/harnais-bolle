@@ -58,6 +58,24 @@ RÈGLES DE REMPLISSAGE
 ### Palette / design
 {{PALETTE}}
 
+### Patterns imposés
+
+<!-- LA FORME IMPOSÉE pour ce qui revient — à ne pas confondre avec les gotchas (§7), qui
+     disent ce qu'il faut éviter. Ici on dit ce qu'il faut REPRODUIRE.
+
+     RÈGLE : un pattern s'écrit à la DEUXIÈME occurrence, pas avant. Écrit trop tôt, il
+     fige une forme qu'on n'a essayée qu'une fois.
+
+     La colonne « exemple à recopier » est la plus importante : un agent reproduit un
+     fichier réel bien plus fidèlement qu'une description en prose. Un pattern sans
+     fichier de référence est une intention, pas un pattern.
+
+     Tableau vide au démarrage — c'est normal. Il se remplit au fil du projet. -->
+
+| Situation qui revient | Forme imposée | Exemple à recopier |
+|---|---|---|
+| {{SITUATION}} | {{FORME}} | `{{CHEMIN_FICHIER_REEL}}` |
+
 ---
 
 ## 3. Permissions
