@@ -10,11 +10,14 @@ trigger: "nouveau projet", "installer le harnais", "démarrer une app", "harnais
 > **Pour rendre ce skill disponible partout** (il vit dans le dépôt `harnais`, pas dans le
 > projet cible) :
 > ```bash
-> ln -s ~/Documents/harnais/skills/nouveau-projet ~/.claude/skills/nouveau-projet
+> ln -s ~/Documents/harnais-bolle/skills/nouveau-projet ~/.claude/skills/nouveau-projet
 > ```
-> À faire une fois par machine.
+> À faire une fois par machine. Fait le 2026-08-06 sur le poste `jean-philippejpbolle` ;
+> ☐ à rejouer sur l'autre Mac (adapter le chemin si le clone y porte un autre nom).
 
-`MATRICE = ~/Documents/harnais` (faire un `git pull` avant de commencer).
+`MATRICE = ~/Documents/harnais-bolle` — le clone local du dépôt `jpbolle/harnais` ; si ce
+chemin n'existe pas sur ce poste, **demander où est le clone** au lieu de deviner. Faire un
+`git pull` avant de commencer.
 
 ---
 
@@ -100,7 +103,7 @@ Cocher ce qui s'applique réellement :
 ## Étape 4 — Écrire
 
 ```bash
-MATRICE=~/Documents/harnais
+MATRICE=~/Documents/harnais-bolle
 PROJET=$(pwd)
 
 cp $MATRICE/3-matrice/AGENTS.template.md  $PROJET/AGENTS.md
