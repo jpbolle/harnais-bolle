@@ -10,12 +10,18 @@
 
 ## Déploiement et git
 
-**Ne jamais pousser. Le push, c'est moi.**
+**Ne jamais commiter ni pousser. Le commit ET le push, c'est moi.**
 Sur tous les projets, quel que soit l'effet du push. Sur ceux où `git push` déclenche un
 déploiement (App Hosting, Vercel…), c'est en plus une mise en production immédiate.
-Préparer le commit, montrer les changements, s'arrêter là. Un accord donné pour un push ne
-vaut jamais pour le suivant.
-*Origine : interview 0-moi du 2026-08-05 (question B7) ; confirmait `AGENTS.md` KitSchool +
+L'agent modifie les fichiers, montre ce qui a changé, et **s'arrête là** : il ne lance ni
+`git add`, ni `git commit`, ni `git push`. Il ne propose pas non plus de le faire en fin de
+tâche — l'utilisateur commite quand il l'a décidé. Un accord donné une fois ne vaut jamais
+pour le suivant.
+**Pourquoi** : le commit est le moment où l'utilisateur relit et s'approprie le travail.
+Un agent qui commite à sa place lui retire cette lecture, et l'historique cesse de refléter
+ses décisions.
+*Origine : interview 0-moi du 2026-08-05 (question B7), **étendue au commit le 2026-08-24**
+(« je fais toujours le commit pour GitHub moi-même ») ; confirmait `AGENTS.md` KitSchool +
 `.claude/settings.json` (`git push` en `ask`).*
 
 **Vérifier que l'autre poste n'a pas avancé avant de proposer un push.**
