@@ -98,3 +98,35 @@ fréquente qui fausse tous les totaux.
 - Les règles internes (autorisation de sortie sur le temps de midi, par exemple) peuvent
   dépendre du **code postal** du domicile et du degré. Ce sont des règles d'établissement :
   les rendre paramétrables plutôt que codées en dur.
+
+## Intégration et pôles territoriaux
+
+Des **pôles territoriaux** (rattachés à l'enseignement spécialisé) envoient des intervenants
+dans les écoles ordinaires : ils accompagnent des élèves **en classe** (souvent pendant le cours)
+et parfois **en individuel**. Ce ne sont pas des membres du personnel de l'école.
+
+Le pôle classe ses élèves en **trois régimes de prise en charge** ; à côté, l'école tient son
+propre suivi **PIA**. Définitions tirées du tableau de travail d'un pôle (2026-10-12) — les
+périodes viennent d'un message de la même intervenante, à reconfirmer pour une autre école :
+
+| Catégorie | Définition (selon le pôle) | Périodes allouées |
+|---|---|---|
+| **PIA** | Suivi généré **et géré par l'école** (pas par le pôle) | — |
+| **A.R** | Élèves avec un **diagnostic** (bilan d'un spécialiste médical) ou une **attestation du CPMS** (besoin d'aménagement), ou **sortant d'IPT** (ancienne IPT 0) | Variable, selon les besoins |
+| **IPT 88** | Élèves **en intégration**, « 88 points » | 4 |
+| **IPT 0** | Élèves ayant bénéficié de l'intégration en ordinaire **avant le 01/09/2020**, dont le suivi reste pertinent | 2 |
+
+- **IPT** = intégration permanente totale (terme FWB). Le « 88 » est un nombre de **points**
+  (d'après le tableau du pôle) — ne pas en déduire davantage.
+- Le pôle tient **une liste par implantation**.
+- ⚠ **« AR » (aménagements raisonnables) se lit sous deux angles.** Côté pôle, c'est un
+  *régime de prise en charge* (le pôle intervient) ; côté école, le *protocole AR* consigne les
+  aménagements de l'élève. Un élève peut avoir un protocole AR **sans** être suivi par le pôle :
+  « élève AR » ne veut pas dire « élève du pôle ». Toujours préciser lequel des deux.
+- **Répartition école / pôle** : pôle et école (équipe PIA) se rencontrent souvent et
+  **décident ensemble qui suit quel élève**. Une liste du pôle peut donc porter une colonne
+  « PIA » destinée à l'école.
+- **Vocabulaire proposé par le pôle** : « **prise en charge Pôle** ».
+- Les intervenants notent leurs observations (souvent faites **en classe**) et les **absences**
+  d'un élève à une séance individuelle prévue. Sans outil commun, ces notes finissent dans
+  l'outil de l'école (Cabanga, par exemple), au mauvais endroit.
