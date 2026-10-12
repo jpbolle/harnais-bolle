@@ -59,6 +59,17 @@ n'y a pas de suite de tests : c'est la seule barrière automatique.
 Ne jamais l'incrémenter automatiquement, ni dans le code, ni dans la doc, ni dans la mémoire.
 *Origine : conventions KitSchool.*
 
+**Avant chaque déploiement, PROPOSER un changement de version — l'utilisateur tranche.**
+Regarder ce qui part en production et proposer, en une ligne avec la raison : **gros
+changement** (nouveau module, refonte visible) → deuxième chiffre (`3.1` → `3.2`) ;
+**changements mineurs** (retouches, corrections) → troisième chiffre (`3.1.1` → `3.1.2`) ;
+rien de visible → ne pas changer. On ne modifie le fichier de version qu'après son accord,
+et avant le build, pour que le numéro parte avec le déploiement.
+**Pourquoi** : le numéro reste une décision de l'utilisateur (règle ci-dessus), mais il
+oubliait de le faire évoluer — la v3.0 a couvert des semaines de changements. La question
+posée au bon moment remplace la mémoire qu'on n'a pas.
+*Origine : session Recto-versIA du 2026-10-11 (passage manuel de 3.0 à 3.1).*
+
 ## Envois vers l'extérieur
 
 **Aucun envoi d'email sans assentiment explicite.**

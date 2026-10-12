@@ -54,7 +54,9 @@ Déclencheurs : « fin de session », « on arrête là », « clôture ».
      l'hébergeur (lockfile à jour), sinon le build de prod casse.
    - {{AUTRES_SURFACES}} — extension, application mobile, tâche planifiée…
 5. **Proposer le déploiement** (skill `deploiement`). **Ne jamais pousser sans accord
-   explicite.**
+   explicite.** Avant : **proposer un changement de version — ou pas** (gros changement →
+   `3.X` → `3.Y` ; mineur → `3.1.1` → `3.1.2`) ; l'utilisateur tranche
+   (cf. `0-moi/consignes.md` § Versions).
 
 ## Pourquoi un rituel
 
