@@ -27,7 +27,7 @@ Ces fichiers ne se copient pas tels quels dans un projet : ils sont **la source*
 laquelle le skill [`/nouveau-projet`](../skills/nouveau-projet/SKILL.md) pioche pour
 rédiger l'`AGENTS.md` et l'`init.md` du projet.
 
-Les seuls fichiers qui se copient littéralement sont les exécutables : `hooks/pre-push`,
+Les seuls fichiers qui se copient littéralement sont les exécutables : `hooks/pre-push`, `hooks/lint-harnais.sh`,
 `ci/ci-node-ts.yml`, `settings.json.example`, et les deux `SKILL.md` (à adapter aux noms
 et commandes réels du projet).
 

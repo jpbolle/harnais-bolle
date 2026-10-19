@@ -48,6 +48,32 @@ prêt.
 *Origine : session du 2026-08-06 — push refusé sur `rectoVersIA-main`, le distant portait
 du travail fait sur l'autre poste.*
 
+**En fin de session, TOUJOURS donner la commande de déploiement du serveur (VPS Hostinger).**
+Quand du code a été écrit, le compte rendu de fin de session ne s'arrête pas à « rien n'est
+commité ni déployé » : il donne la suite jusqu'à la production — commit, push (faits par
+l'utilisateur), puis la **commande à coller dans le terminal web Hostinger** (celle du skill
+`/deploy` du projet), en rappelant les surfaces annexes si elles sont concernées (règles
+Firestore, variables d'environnement). Toujours étape par étape (règle ci-dessous).
+**Pourquoi** : l'agent l'oubliait systématiquement ; l'utilisateur devait la réclamer à
+chaque fin de session, et un oubli laisse en production une version différente de celle
+qu'il croit avoir livrée.
+*Origine : session Recto-versIA du 2026-10-14 (« la commande hostinger que tu oublies
+toujours de me donner. Note-le d'ailleurs dans le harnais »).*
+
+**Ne jamais effacer du travail ni de l'historique : liste nommée.**
+Jamais sans accord explicite, même « logiquement » pour sortir d'une situation : `git reset
+--hard`, `git checkout -- <fichier>` ou `git restore <fichier>` sur un fichier modifié, `git
+clean`, `git stash drop`, `git push --force`, `git rebase` sur des commits déjà poussés,
+`git branch -D`. Toutes détruisent ce qui n'est pas commité, ou réécrivent ce qui l'est, sans
+retour. Pour **revenir en arrière** : commiter d'abord l'état courant (c'est le filet), puis
+`git restore --source=<commit> -- <fichier>` pour un fichier, `git revert` pour un commit
+entier ; l'historique reste intact et le retour est lui-même réversible.
+**Pourquoi** : la règle « en cas de doute sur une action irréversible, demander » suppose que
+l'agent ait le doute. Une commande qu'il connaît bien ne lui en inspire aucun ; la liste
+remplace le doute.
+*Origine : skill `git` d'un collègue (« n'efface jamais d'historique »), examiné le
+2026-10-19 ; le reste du skill, où l'agent commite et pousse lui-même, a été écarté.*
+
 **Ne jamais contourner un garde-fou.**
 Pas de `--no-verify` sur un hook pre-push sans accord explicite. Le hook existe parce qu'il
 n'y a pas de suite de tests : c'est la seule barrière automatique.
@@ -94,6 +120,28 @@ tout fonctionne en local. Sur KitSchool : `npm install <pkg>` obligatoire, puis
 `bun install` pour resynchroniser.
 *Origine : `AGENTS.md` KitSchool — incident vécu.*
 
+**Python : tout passe par uv — jamais `pip install` ni environnement activé à la main.**
+uv (gestionnaire de projets Python) remplace pip et venv : `uv init` pour créer un projet,
+`uv add <bibliothèque>` pour en ajouter une (la demande d'accord ci-dessus reste
+obligatoire), `uv run <commande>` pour exécuter — uv crée et utilise tout seul
+l'environnement isolé du projet. Un script isolé se lance aussi par `uv run script.py` ; s'il
+a besoin d'une bibliothèque, il la déclare **dans son en-tête** (bloc `# /// script` avec
+`dependencies = [...]`, métadonnées inline) et uv l'installe à la volée, sans projet ni
+fichier de dépendances à côté. *(technique vue dans le skill `validateur` d'un collègue,
+2026-10-19)*
+Installation : par l'**installateur officiel**
+(`curl -LsSf https://astral.sh/uv/install.sh | sh`, dans `~/.local/bin`), **pas par
+Homebrew** ; mise à jour par `uv self update`.
+**Comment ça se manifeste si on l'oublie** : un `pip install` lancé hors de uv installe la
+bibliothèque dans le Python du Mac, pas dans le projet — le script marche sur ce poste et
+échoue sur l'autre avec `ModuleNotFoundError`. *(déduit — à valider)*
+**Pourquoi** : outil recommandé à l'utilisateur, qui l'a adopté « pour tout ce qui est
+Python ».
+*Origine : session harnais du 2026-10-14. Installé ce jour-là sur le MacBook Pro par
+l'installateur officiel, parce que Homebrew y refusait toute installation (« Please update
+your Command Line Tools ») — Homebrew reste à réparer. **Mac Studio : pas encore
+installé.***
+
 ## Actions risquées en général
 
 **En cas de doute sur une action difficilement réversible, demander.**
@@ -103,6 +151,61 @@ sécurité, déploiement, migration. Une action irréversible faite « logiqueme
 demander est un incident, pas une initiative.
 *Origine : interview 0-moi du 2026-08-05 (question C11, formulation « et ce que tu juges
 important »).*
+
+## Exactitude
+
+> Les quatre règles de cette section viennent d'un prompt d'installation de « persona »
+> examiné en session harnais le 2026-10-14. L'utilisateur a demandé d'y reprendre « ce que
+> tu juges à reprendre ». Le reste du prompt a été écarté (références culturelles
+> obligatoires, synthèse finale, registres de personnage), parce qu'il contredisait la
+> concision exigée dans [`methode.md`](methode.md#format-des-réponses).
+
+**Sur l'IA récente, vérifier avant d'affirmer.**
+Modèles, outils, fonctions de Claude Code, de Cursor ou d'Antigravity de moins d'un an :
+consulter la documentation officielle ou faire une recherche **avant** d'écrire quoi que ce
+soit, surtout dans le harnais. La connaissance interne de l'agent a une date de coupure.
+Ces outils changent de comportement d'une version à l'autre.
+**Comment ça se manifeste** : une affirmation plausible mais périmée. Le jour même où la
+règle a été adoptée, l'agent a écrit que Claude Code « ne lit pas `AGENTS.md` ». La
+documentation dit qu'il le lit depuis la version 2.1.277. Une fois écrite dans la matrice,
+l'erreur se serait recopiée dans chaque projet.
+*Origine : session harnais du 2026-10-14.*
+
+**Séparer le fait, l'interprétation et la lacune.**
+Quand une réponse s'appuie sur un fichier, une doc ou des données, signaler de quel
+registre relève chaque affirmation :
+- le fait : « le fichier dit que » ;
+- l'interprétation : « je lis ça comme » ;
+- la lacune : « le fichier ne précise pas ».
+
+C'est la marque `(déduit — à valider)` de `0-moi/`, appliquée aux réponses.
+**Pourquoi** : l'utilisateur ne relit pas le code lui-même (cf.
+[`profil.md`](profil.md#rapport-au-code)). Une déduction présentée comme un fait n'a donc
+personne pour l'intercepter. *(déduit — à valider)*
+*Origine : session harnais du 2026-10-14.*
+
+**Source inaccessible : le dire, ne jamais combler.**
+Page web en erreur (403, 404), contenu payant, page ou fichier tronqué, document illisible :
+l'écrire explicitement, en précisant ce qui manque. Ne jamais reconstituer le contenu
+manquant « de mémoire » ou par vraisemblance.
+**Comment ça se manifeste si on l'oublie** : une réponse fluide et sourcée en apparence,
+dont une partie n'a jamais été lue. Rien à l'écran ne distingue le lu de l'inventé.
+*(déduit — à valider)*
+*Origine : session harnais du 2026-10-14.*
+
+**Expliquer une erreur de l'agent par son mécanisme, pas par une image humaine.**
+Pas d'« étourderie », de « distraction » ni de « j'avais la tête ailleurs ». Nommer la
+cause réelle :
+- une instruction ambiguë ;
+- une information absente du contexte ou noyée dedans ;
+- une règle lue mais mal généralisée ;
+- une connaissance périmée.
+
+**Pourquoi** : la cause réelle dit où corriger (une consigne à préciser, un fichier à faire
+lire, une règle à ajouter au harnais). Une excuse « humaine » ne donne aucune prise et
+laisse l'erreur se reproduire. C'est le principe « chaque gotcha porte sa cicatrice »,
+appliqué à l'agent lui-même.
+*Origine : session harnais du 2026-10-14.*
 
 ## Comptes rendus
 

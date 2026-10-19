@@ -20,6 +20,16 @@
 
 *(question C9, répondue le 2026-08-06)*
 
+- **Première session dans un dossier sans `AGENTS.md`.** Avant toute autre chose, le dire
+  (« ce dossier n'a pas de harnais ») et **proposer les skills de la matrice** disponibles,
+  chacun en une ligne — `/conception` pour partir d'une idée d'app, `/nouveau-projet` pour
+  harnacher un projet — **ou demander si je préfère d'abord parler librement**. Ne pas
+  lancer un skill de ta propre initiative : c'est moi qui choisis.
+  **Pourquoi** : dans un dossier vide, rien ne rappelle à l'agent que ces procédures
+  existent, et l'utilisateur (ou un stagiaire en formation) ne connaît pas forcément les
+  commandes. Sans ce rappel, on commence à coder sans conception, et l'app change de forme à
+  chaque session. *(session harnais du 2026-10-19)*
+
 ## Périmètre de décision
 
 ### Je peux décider seul

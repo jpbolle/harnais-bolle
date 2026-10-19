@@ -77,6 +77,13 @@ Un sous-agent est une session complète : il **consomme des jetons rapidement**.
 question à laquelle on peut répondre en ouvrant un fichier est une dépense pure. Le calcul
 est simple : déléguer si la recherche va lire **beaucoup** pour produire **peu**.
 
+Repère concret : **si comprendre la question demande d'ouvrir plus de trois fichiers**, ou
+de parcourir un dossier entier, déléguer. Sans outil de sous-agents (Cursor, Antigravity),
+lister d'abord l'arborescence sur deux ou trois niveaux, puis n'ouvrir que les fichiers
+nécessaires.
+*Origine : seuil repris d'un prompt d'installation d'espace de cours, examiné le
+2026-10-14.*
+
 ## Portabilité
 
 Les sous-agents sont un mécanisme **propre à Claude Code**. Cursor et Antigravity n'ont pas

@@ -26,10 +26,12 @@ amnésie en continuité.
 |---|---|---|
 | `AGENTS.md` | Règles impératives | Lu **nativement par Cursor** ; doit être à la racine |
 | `CLAUDE.md` | **Symlink → `AGENTS.md`** | Claude Code charge `CLAUDE.md` ; le symlink garantit zéro divergence entre les deux outils |
+| {{AGENTS_LOCAUX}} | Règles propres à un sous-dossier (+ symlink `CLAUDE.md` à côté) | Chargé seulement quand l'agent travaille dans ce dossier <!-- GABARIT : une ligne par AGENTS.md local, ex. `extension/AGENTS.md` ; supprimer la ligne s'il n'y en a aucun. Voir 1-methode/les-5-couches.md --> |
 | `init.md` | Briefing technique dense | Racine, lu au début de chaque session |
 | `harnais/README.md` | **Ce document** | `harnais/` regroupe ce qui n'a pas d'emplacement imposé |
 | `harnais/memoire/` | État cross-sessions (index + rollups) | Dans le dépôt : survit aux renommages, se synchronise entre machines |
-| `harnais/hooks/pre-push` | Bloque le push si `{{COMMANDE_VERIF}}` échoue | Activé par `git config core.hooksPath harnais/hooks` |
+| `harnais/hooks/pre-push` | Bloque le push si `lint-harnais.sh` ou `{{COMMANDE_VERIF}}` échoue | Activé par `git config core.hooksPath harnais/hooks` |
+| `harnais/hooks/lint-harnais.sh` | Vérifie la forme du harnais (symlinks, gabarits, index mémoire, en-têtes de skills, secrets et fichiers lourds suivis par git) sans rien modifier | Lancé par le pre-push et à la demande (« vérifie le harnais ») |
 | `.github/workflows/ci.yml` | Re-vérification après push sur machine neutre | Emplacement imposé par GitHub |
 | `.claude/skills/` | Procédures répétables | Emplacement imposé par Claude Code |
 | `.claude/settings.json` | Allowlist de permissions, versionnée | Emplacement imposé par Claude Code |

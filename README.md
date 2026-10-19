@@ -40,18 +40,23 @@ importer**.
               garde-fous, skills portables, hook, CI
 2-ecole/      Le socle commun aux apps scolaires FWB            → à PIOCHER par blocs
 3-matrice/    Les gabarits AGENTS.md / init.md / harnais-README → à REMPLIR
-skills/       Le lanceur /nouveau-projet                        → à invoquer
+skills/       Les lanceurs /conception et /nouveau-projet       → à invoquer
 ```
 
 ## Démarrer une nouvelle app
 
-Dans le dossier du nouveau projet, avec un agent :
+Deux skills, dans cet ordre, dans le dossier du nouveau projet, avec un agent :
 
 ```
-/nouveau-projet
+/conception <pitch>      # 1. de l'idée au plan : conception.md, aucun code
+/nouveau-projet          # 2. le harnais : taille, AGENTS.md, init.md, roadmap.md
 ```
 
-Le skill pose une dizaine de questions (stack, prod ou non, données personnelles, surfaces de
+[`/conception`](skills/conception/SKILL.md) interroge une question à la fois (périmètre,
+écrans, contrainte, critère de succès), propose les options de stack, et écrit un seul
+fichier, `conception.md`. Sur un projet qui a déjà du code, on passe directement au second.
+
+[`/nouveau-projet`](skills/nouveau-projet/SKILL.md) pose une dizaine de questions (stack, prod ou non, données personnelles, surfaces de
 déploiement, taille du harnais), puis **génère** l'`AGENTS.md` et l'`init.md` du projet en
 piochant uniquement les blocs des tiers 1 et 2 qui s'appliquent réellement.
 

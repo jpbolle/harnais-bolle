@@ -65,6 +65,17 @@
 | **recto-versia** | Outil d'écriture et de lecture pour le cours de français : suivi des compétences de **littératie** des élèves | Projet actif |
 | `pedagokitApp`, `daspalecte`, `Sambre-romantique`, `simulationHTML`, `profilIA` | — | « Évolueront gentiment » : pas de chantier en cours |
 
+## Côté pédagogie
+
+**Rien de déclaré à ce jour.** Section ouverte le 2026-10-14 : `profil.md` décrivait le
+référent numérique et le vibe codeur, pas le professeur de français. Or recto-versia et
+daspalecte sont des outils de classe. Questions à poser lors d'une reprise de l'interview,
+**une à la fois** :
+
+- Une méthode pédagogique que j'aime utiliser (et pourquoi) ?
+- Les niveaux et les classes que j'ai en français cette année ?
+- Une contrainte réelle de ma classe, au-delà des Chromebooks (temps, hétérogénéité) ?
+
 ## Ce que je veux éviter de revivre
 
 **Rien de déclaré** — pas d'échec marquant avec un agent IA à ce jour (question E18,

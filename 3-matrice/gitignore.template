@@ -1,0 +1,30 @@
+# .gitignore — gabarit du harnais. Ce que git ne doit JAMAIS suivre.
+# Si le projet a déjà un .gitignore, n'ajouter que les lignes qui manquent.
+# Le hook pre-push (lint-harnais.sh) refuse de toute façon un secret ou un fichier > 5 Mo suivi.
+
+# Parasites du système et des éditeurs
+.DS_Store
+Thumbs.db
+*.swp
+
+# Secrets : variables d'environnement, clés, comptes de service
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+serviceAccount*.json
+credentials*.json
+
+# Dépendances et sorties de build (adapter au projet)
+node_modules/
+dist/
+.next/
+__pycache__/
+.venv/
+
+# Exports et données réelles : jamais dans le dépôt (cf. 2-ecole/donnees-eleves.md)
+*.csv
+*.xlsx
+exports/

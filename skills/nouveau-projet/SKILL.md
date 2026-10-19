@@ -10,12 +10,13 @@ trigger: "nouveau projet", "installer le harnais", "démarrer une app", "harnais
 > **Pour rendre ce skill disponible partout** (il vit dans le dépôt `harnais`, pas dans le
 > projet cible) :
 > ```bash
-> ln -s ~/Documents/harnais-bolle/skills/nouveau-projet ~/.claude/skills/nouveau-projet
+> ln -s ~/Documents/harnais/skills/nouveau-projet ~/.claude/skills/nouveau-projet
 > ```
-> À faire une fois par machine. Fait le 2026-08-06 sur le poste `jean-philippejpbolle` ;
-> ☐ à rejouer sur l'autre Mac (adapter le chemin si le clone y porte un autre nom).
+> À faire une fois par machine. Vérifier : `ls ~/.claude/skills/` doit lister
+> `nouveau-projet`. Fait sur le **MacBook Pro le 2026-10-19** ; **Mac Studio : à faire**
+> (liste des éléments hors dépôt à rejouer : [`1-methode/skills-externes.md`](../../1-methode/skills-externes.md)).
 
-`MATRICE = ~/Documents/harnais-bolle` — le clone local du dépôt `jpbolle/harnais` ; si ce
+`MATRICE = ~/Documents/harnais` — le clone local du dépôt `jpbolle/harnais` ; si ce
 chemin n'existe pas sur ce poste, **demander où est le clone** au lieu de deviner. Faire un
 `git pull` avant de commencer.
 
@@ -35,8 +36,13 @@ et coûteux de retirer une règle à laquelle on a commencé à croire.
 
 ## Étape 1 — Interroger
 
-Poser ces questions **par groupes**, pas toutes d'un coup. Écrire les réponses au fur et
-à mesure dans un brouillon.
+**D'abord, regarder si `conception.md` existe à la racine** (produit par
+[`/conception`](../conception/SKILL.md)). S'il existe, le lire : il répond aux questions 1
+à 3 (nom, stack retenue, pas encore de code) et souvent à la 4 (pour qui, combien). Ne pas
+les reposer ; les confirmer en une ligne.
+
+Poser les autres questions **par groupes**, pas toutes d'un coup. Écrire les réponses au fur
+et à mesure dans un brouillon.
 
 **Le projet**
 1. Nom du projet, et en une phrase : qu'est-ce qu'il fait, pour qui ?
@@ -100,35 +106,70 @@ Cocher ce qui s'applique réellement :
 
 ---
 
-## Étape 4 — Écrire
+## Étape 4 — Inventorier, puis écrire
+
+**Règle : n'écraser aucun fichier existant, et ne rien créer d'autre que la liste
+ci-dessous.** Sur une app qui a déjà du code (question 3), un `AGENTS.md`, des skills ou un
+`settings.json` peuvent déjà exister — et porter des gotchas payés cher.
+**Comment ça se manifeste si on l'oublie** : `cp` remplace le fichier sans un mot ;
+l'`AGENTS.md` du projet devient le gabarit vierge, et les règles perdues ne réapparaissent
+que dans `git diff` — ou nulle part si le fichier n'était pas commité. Même effet discret
+pour `git config core.hooksPath` : il débranche un hook existant (husky…) sans erreur.
+
+**4a. Inventaire** — avant toute écriture :
+
+Si le dossier n'a pas de `.git` (cas d'un projet sorti de `/conception`) : **proposer**
+`git init -b main`, sans le lancer d'office. Sans dépôt, ni le hook ni la mémoire versionnée
+n'ont de sens, et le premier commit reste à l'utilisateur.
 
 ```bash
-MATRICE=~/Documents/harnais-bolle
+MATRICE=~/Documents/harnais
 PROJET=$(pwd)
 
-cp $MATRICE/3-matrice/AGENTS.template.md  $PROJET/AGENTS.md
-cp $MATRICE/3-matrice/init.template.md    $PROJET/init.md      # taille M et plus
-cp $MATRICE/3-matrice/roadmap.template.md $PROJET/roadmap.md   # taille M et plus
-ln -s AGENTS.md $PROJET/CLAUDE.md
+for f in AGENTS.md CLAUDE.md init.md roadmap.md harnais .claude/skills .claude/settings.json \
+         .github/workflows/ci.yml; do
+  [ -e "$PROJET/$f" ] && echo "EXISTE DÉJÀ : $f"
+done
+git config core.hooksPath   # vide attendu ; sinon un hook est déjà branché
+```
+
+Si une ligne s'affiche : **s'arrêter**, montrer la liste, et faire trancher l'utilisateur
+fichier par fichier (fusionner à la main, garder l'existant, ou renommer l'ancien). Ne
+jamais fusionner « logiquement » sans demander.
+
+**4b. Écriture** — `cp -n` (*no-clobber* : ne remplace jamais un fichier existant), en
+filet de sécurité même après l'inventaire :
+
+```bash
+cp -n $MATRICE/3-matrice/gitignore.template  $PROJET/.gitignore  # toutes tailles ; s'il existe, voir ci-dessous
+cp -n $MATRICE/3-matrice/AGENTS.template.md  $PROJET/AGENTS.md
+cp -n $MATRICE/3-matrice/init.template.md    $PROJET/init.md      # taille M et plus
+cp -n $MATRICE/3-matrice/roadmap.template.md $PROJET/roadmap.md   # taille M et plus
+ln -s AGENTS.md $PROJET/CLAUDE.md          # échoue (« File exists ») plutôt qu'écraser
 
 mkdir -p $PROJET/harnais/memoire/archive
-cp $MATRICE/3-matrice/harnais-README.template.md $PROJET/harnais/README.md
+cp -n $MATRICE/3-matrice/harnais-README.template.md $PROJET/harnais/README.md
 
 # Taille M et plus
 mkdir -p $PROJET/.claude/skills
-cp -r $MATRICE/1-methode/skills/*           $PROJET/.claude/skills/
-cp $MATRICE/1-methode/settings.json.example $PROJET/.claude/settings.json
+cp -Rn $MATRICE/1-methode/skills/*           $PROJET/.claude/skills/
+cp -n  $MATRICE/1-methode/settings.json.example $PROJET/.claude/settings.json
 
 # Taille L uniquement
 mkdir -p $PROJET/harnais/hooks $PROJET/harnais/plans $PROJET/.github/workflows
-cp $MATRICE/3-matrice/plan.template.md $PROJET/harnais/plans/_gabarit.md
-cp $MATRICE/1-methode/hooks/pre-push $PROJET/harnais/hooks/pre-push
-chmod +x $PROJET/harnais/hooks/pre-push
-git config core.hooksPath harnais/hooks
-cp $MATRICE/1-methode/ci/ci-node-ts.yml $PROJET/.github/workflows/ci.yml
+cp -n $MATRICE/3-matrice/plan.template.md $PROJET/harnais/plans/_gabarit.md
+# conception.md devient le premier plan du projet (taille L) ; en S et M il reste à la racine
+[ -f $PROJET/conception.md ] && mv $PROJET/conception.md $PROJET/harnais/plans/$(date +%F)-conception.md
+cp -n $MATRICE/1-methode/hooks/pre-push        $PROJET/harnais/hooks/pre-push
+cp -n $MATRICE/1-methode/hooks/lint-harnais.sh $PROJET/harnais/hooks/lint-harnais.sh
+chmod +x $PROJET/harnais/hooks/pre-push $PROJET/harnais/hooks/lint-harnais.sh
+git config core.hooksPath harnais/hooks    # seulement si 4a l'a montré vide
+cp -n $MATRICE/1-methode/ci/ci-node-ts.yml $PROJET/.github/workflows/ci.yml
 ```
 
 Puis, **fichier par fichier** :
+0. si un `.gitignore` existait déjà, y **ajouter seulement les lignes manquantes** du gabarit
+   (secrets, données réelles) et vérifier avec `git ls-files` qu'aucun secret n'est déjà suivi ;
 1. remplacer chaque `{{PLACEHOLDER}}` par la réponse correspondante ;
 2. **supprimer toute section non retenue à l'étape 3** ;
 3. supprimer les commentaires de gabarit ;
@@ -138,7 +179,8 @@ Puis, **fichier par fichier** :
 6. créer `harnais/memoire/MEMORY.md` avec un en-tête et l'index vide ;
 7. remplir `roadmap.md` avec les réponses à la question 1 — **et demander à l'utilisateur
    ce qu'il a déjà écarté**. C'est le seul moment où il y pense ; après, cette information
-   ne s'écrit jamais.
+   ne s'écrit jamais. Si `conception.md` existe : ses « Étapes » alimentent « Ensuite »,
+   son « Ce que ça ne fait pas » alimente « Écarté ».
 
 Noter dans `harnais/README.md` la **version de la matrice** (lire `$MATRICE/VERSION`) et
 la date.
@@ -148,10 +190,13 @@ la date.
 ## Étape 5 — Vérifier
 
 - [ ] `CLAUDE.md` est bien un **symlink** vers `AGENTS.md` (`ls -l CLAUDE.md`)
-- [ ] Aucun `{{PLACEHOLDER}}` ne subsiste (`grep -rn '{{' . --exclude-dir=.git`)
-- [ ] Aucun commentaire `<!-- GABARIT` ne subsiste
+- [ ] Aucun `{{PLACEHOLDER}}` ni `<!-- GABARIT` ne subsiste — taille L :
+      `harnais/hooks/lint-harnais.sh` doit dire « Tout est OK » ; sinon
+      `grep -rn '{{' . --exclude-dir=.git`
 - [ ] Taille L : `git config core.hooksPath` renvoie `harnais/hooks`
-- [ ] Taille L : le hook s'exécute (`sh harnais/hooks/pre-push`)
+- [ ] Taille L : le hook **refuse** quand il doit (test à la pose : un `AGENTS.md` orphelin
+      temporaire, cf. [`garde-fous.md`](../../1-methode/garde-fous.md#tester-le-garde-fou-à-la-pose)),
+      puis passe une fois le dossier de test supprimé
 - [ ] `AGENTS.md` ne contient **aucune** règle sans objet dans ce projet — relire avec
       cette seule question en tête
 - [ ] La mémoire ne contient aucune donnée personnelle
@@ -160,7 +205,12 @@ la date.
 
 ## Étape 6 — Rendre compte
 
-Annoncer : la taille retenue et pourquoi, les fichiers créés, les blocs du socle
+Afficher **ce qui a réellement changé** — `git status --short --untracked-files=all` (le
+projet est sous git ; sinon, l'arborescence des fichiers listés à l'étape 4b) — et
+**confirmer que rien d'autre n'a été créé, et qu'aucune ligne `M` (fichier modifié)
+n'apparaît** : c'est la preuve que la règle de l'étape 4 a tenu, pas une affirmation.
+
+Annoncer ensuite : la taille retenue et pourquoi, les fichiers créés, les blocs du socle
 **écartés** (et pourquoi — c'est l'information la plus utile pour la suite), et ce qui
 reste à faire à la main (valeurs d'environnement, activation du hook sur les autres
 machines).

@@ -73,10 +73,21 @@ Ce qui reste, avec ce qui bloque.
 - 2026-08-05 — une ligne sur ce qui a été fait cette session.
 ```
 
+Deux règles pour l'historique :
+- **Le plus récent en haut.** On ne lit que les premières lignes pour retrouver le fil ; si
+  le récent est en bas, il faut tout parcourir.
+- **La date vient de l'outil, jamais de tête** : `date +%F` avant d'écrire. Claude Code
+  connaît la date du jour, un autre moteur pas forcément, et une date inventée fausse tout
+  l'ordre.
+
 **Le rollup remplace le journal de session.** L'ancien réflexe — un fichier `session_*.md`
 par session — produit une mémoire qui grossit sans jamais se consolider : au bout de
 trente sessions, plus personne ne la lit, agent compris. On met à jour le rollup du module
-touché et on ajoute **une ligne** à son historique.
+touché et on ajoute **une ligne** à son historique — en fin de session, ou **à tout moment
+sur « note ça »** (cf. le rituel de session).
+*Précisions du 2026-10-19, reprises d'un skill `journaling` d'un collègue : son registre
+(ajout sans réécriture) a été écarté, ses règles de date, d'ordre et de déclenchement
+explicite gardées.*
 
 ### Fichiers topiques
 

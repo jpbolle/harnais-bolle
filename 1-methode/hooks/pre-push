@@ -9,11 +9,26 @@
 #   chmod +x harnais/hooks/pre-push
 #
 # Vérifier qu'il est actif :  git config core.hooksPath   → doit renvoyer "harnais/hooks"
+# Le tester sans pousser   :  harnais/hooks/pre-push      (le script se lance tel quel)
 #
-# À ADAPTER : remplacer la commande ci-dessous par la vérification la plus rapide qui
-# attrape le plus d'erreurs sur ce projet (tsc, tests, linter typé…). Un hook qui ne
-# vérifie rien de sérieux est pire que pas de hook.
+# Deux vérifications, dans l'ordre :
+#   1. Harnais — la forme des fichiers du harnais, par lint-harnais.sh (voir son en-tête).
+#      Valable sur tout projet.
+#   2. Code — la commande CHECK_CMD ci-dessous. À ADAPTER : remplacer par la vérification
+#      la plus rapide qui attrape le plus d'erreurs sur ce projet (tsc, tests, linter typé…).
+#      Un hook qui ne vérifie rien de sérieux est pire que pas de hook.
 
+# ---- 1. Harnais : forme des fichiers du harnais ----------------------------------------
+# Délégué à lint-harnais.sh (même dossier) : AGENTS.md orphelins, gabarits non remplis,
+# index mémoire qui enfle, en-têtes de SKILL.md cassés. Relançable à la main, sans pousser.
+LINT="$(dirname "$0")/lint-harnais.sh"
+if [ -x "$LINT" ]; then
+  "$LINT" || { echo "[harnais]    Push annulé : corrige, relance $LINT, puis repushe."; exit 1; }
+else
+  echo "[harnais] ⚠️  $LINT absent ou non exécutable — vérification de forme sautée."
+fi
+
+# ---- 2. Code : compilation / tests ----------------------------------------------------
 CHECK_CMD="npx tsc --noEmit"
 CHECK_LABEL="TypeScript"
 

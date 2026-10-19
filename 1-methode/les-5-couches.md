@@ -72,6 +72,31 @@ Ce qui n'est imposé par aucun outil (cette documentation, les hooks git) va dan
 dossier `harnais/` à la racine du projet, dont le `README.md` sert de **carte** vers tout
 le reste. Un lecteur qui arrive sur le projet ne doit avoir qu'un seul endroit où aller.
 
+## Consignes locales : un `AGENTS.md` par sous-dossier
+
+Une règle qui ne vaut que pour **une partie** du projet (le dossier de l'extension Chrome,
+les fonctions serveur, les scripts de migration) ne va pas dans l'`AGENTS.md` racine : elle
+y serait lue à chaque session pour servir une fois sur dix, et ferait enfler le fichier.
+Elle va dans un `AGENTS.md` **posé dans ce dossier**, avec son propre symlink `CLAUDE.md`.
+
+| Point | Règle |
+|---|---|
+| Contenu | Titre = chemin du dossier, **une phrase** sur ce qu'il contient, puis ses règles propres. Jamais une règle déjà dite à la racine. |
+| Chargement | Claude Code le charge **à la demande** : la première fois qu'il lit ou modifie un fichier de ce dossier, pas au démarrage. Coût nul tant qu'on n'y travaille pas. |
+| Symlink | `cd <dossier> && ln -s AGENTS.md CLAUDE.md` — **obligatoire**, comme à la racine. |
+| Édition | Toujours modifier `AGENTS.md`, jamais `CLAUDE.md` : les outils d'écriture de Claude Code refusent d'écrire à travers un symlink. |
+| Carte | Le `harnais/README.md` du projet liste les `AGENTS.md` locaux. Sans ça, personne ne sait qu'ils existent. |
+
+**Comment ça se manifeste si on oublie le symlink** : la règle locale est **ignorée sans
+erreur**. Claude Code ne lit `AGENTS.md` nativement qu'à partir de la version 2.1.277, et
+seulement en l'absence de tout `CLAUDE.md` — or le MacBook Pro tournait en 2.1.223 au
+2026-10-14. Vérification : `/memory` dans Claude Code liste les fichiers d'instructions
+chargés. **Filet mécanique** (taille L) : le hook `pre-push` refuse le push s'il trouve un
+`AGENTS.md` sans `CLAUDE.md` à côté, cf. [`garde-fous.md`](garde-fous.md#ce-que-le-hook-vérifie).
+*Origine : prompts d'installation d'un harnais d'espace de cours, examinés en session
+harnais du 2026-10-14 ; comportement de chargement vérifié dans la documentation Claude
+Code (page « memory »).*
+
 ## Règles d'entretien
 
 - **`AGENTS.md` ne grossit que pour une règle non négociable nouvelle.** Les gotchas

@@ -10,47 +10,57 @@ instructions de remplissage (en `<!-- commentaires -->` à supprimer une fois re
 | [`init.template.md`](init.template.md) | `init.md` à la racine | 2 |
 | [`roadmap.template.md`](roadmap.template.md) | `roadmap.md` à la racine (taille M et plus) | intention |
 | [`plan.template.md`](plan.template.md) | `harnais/plans/<date>-<sujet>.md` (taille L) | intention |
+| [`conception.template.md`](conception.template.md) | `conception.md` à la racine, avant tout code (rempli par `/conception`) | intention |
 | [`harnais-README.template.md`](harnais-README.template.md) | `harnais/README.md` | carte |
+| [`gitignore.template`](gitignore.template) | `.gitignore` à la racine (compléter s'il existe déjà) | garde-fou |
 
 ## Procédure automatique
 
 Dans le dossier du nouveau projet, avec un agent :
 
 ```
-/nouveau-projet
+/conception <pitch>   # si le projet part d'une idée, sans code : écrit conception.md
+/nouveau-projet       # pose le harnais
 ```
 
-Voir [`../skills/nouveau-projet/SKILL.md`](../skills/nouveau-projet/SKILL.md).
+Voir [`../skills/conception/SKILL.md`](../skills/conception/SKILL.md) et
+[`../skills/nouveau-projet/SKILL.md`](../skills/nouveau-projet/SKILL.md).
 
 ## Procédure manuelle
 
-Si aucun agent n'est disponible :
+Si aucun agent n'est disponible. **D'abord l'inventaire** de l'étape 4a du skill
+([`SKILL.md`](../skills/nouveau-projet/SKILL.md#étape-4--inventorier-puis-écrire)) : si un
+fichier visé existe déjà, on s'arrête et on fusionne à la main. Les `cp -n` ci-dessous ne
+remplacent jamais un fichier existant — ils le sautent en silence, d'où l'inventaire.
 
 ```bash
 MATRICE=~/Documents/harnais
 PROJET=<chemin-du-nouveau-projet>
 
 # Couches 1-2
-cp $MATRICE/3-matrice/AGENTS.template.md $PROJET/AGENTS.md
-cp $MATRICE/3-matrice/init.template.md   $PROJET/init.md
+cp -n $MATRICE/3-matrice/gitignore.template   $PROJET/.gitignore   # s'il existe : ajouter les lignes manquantes à la main
+cp -n $MATRICE/3-matrice/AGENTS.template.md $PROJET/AGENTS.md
+cp -n $MATRICE/3-matrice/init.template.md   $PROJET/init.md
 cd $PROJET && ln -s AGENTS.md CLAUDE.md
 
 # Carte du harnais + garde-fous (taille L uniquement)
 mkdir -p $PROJET/harnais/hooks $PROJET/.github/workflows
-cp $MATRICE/3-matrice/harnais-README.template.md $PROJET/harnais/README.md
-cp $MATRICE/1-methode/hooks/pre-push             $PROJET/harnais/hooks/pre-push
-chmod +x $PROJET/harnais/hooks/pre-push
-git config core.hooksPath harnais/hooks
-cp $MATRICE/1-methode/ci/ci-node-ts.yml          $PROJET/.github/workflows/ci.yml
+cp -n $MATRICE/3-matrice/harnais-README.template.md $PROJET/harnais/README.md
+cp -n $MATRICE/1-methode/hooks/pre-push             $PROJET/harnais/hooks/pre-push
+cp -n $MATRICE/1-methode/hooks/lint-harnais.sh      $PROJET/harnais/hooks/lint-harnais.sh
+chmod +x $PROJET/harnais/hooks/pre-push $PROJET/harnais/hooks/lint-harnais.sh
+git config core.hooksPath harnais/hooks   # seulement si `git config core.hooksPath` était vide
+cp -n $MATRICE/1-methode/ci/ci-node-ts.yml          $PROJET/.github/workflows/ci.yml
 
 # Skills (taille M et plus)
 mkdir -p $PROJET/.claude/skills
-cp -r $MATRICE/1-methode/skills/*                $PROJET/.claude/skills/
-cp $MATRICE/1-methode/settings.json.example      $PROJET/.claude/settings.json
+cp -Rn $MATRICE/1-methode/skills/*                  $PROJET/.claude/skills/
+cp -n  $MATRICE/1-methode/settings.json.example     $PROJET/.claude/settings.json
 
 # Mémoire
 mkdir -p $PROJET/harnais/memoire/archive
-printf '# Mémoire %s\n\nIndex — une ligne par entrée.\n' "$(basename $PROJET)" \
+[ -e $PROJET/harnais/memoire/MEMORY.md ] || \
+  printf '# Mémoire %s\n\nIndex — une ligne par entrée.\n' "$(basename $PROJET)" \
   > $PROJET/harnais/memoire/MEMORY.md
 ```
 

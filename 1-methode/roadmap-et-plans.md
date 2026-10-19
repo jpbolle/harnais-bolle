@@ -48,6 +48,28 @@ justement l'alternative écartée qu'on cherche à retrouver.
 Une fois la tâche livrée : le plan reste. Il n'est ni supprimé ni mis à jour, c'est une
 trace datée. Ce qui a réellement été construit se lit dans `init.md` et dans la mémoire.
 
+## Avant le harnais : `conception.md`
+
+Les deux foyers ci-dessus supposent qu'un projet existe. Avant, quand il n'y a qu'une idée
+et un dossier vide, le skill [`/conception`](../skills/conception/SKILL.md) écrit **un seul
+fichier à la racine**, `conception.md` (gabarit :
+[`3-matrice/conception.template.md`](../3-matrice/conception.template.md)) : ce que l'app
+fait et ne fait pas, à quoi elle ressemble écran par écran, les options de stack et celle
+retenue, les étapes avec leur critère visible, le critère de succès.
+
+C'est un plan au sens de ce fichier (options obligatoires, trace datée, jamais mis à jour
+après coup), écrit avant que `harnais/plans/` existe. Son sort ensuite :
+
+| Taille | Ce que `/nouveau-projet` en fait |
+|---|---|
+| **S**, **M** | Reste à la racine, tel quel |
+| **L** | Déplacé dans `harnais/plans/<date>-conception.md` : c'est le premier plan du projet |
+
+Dans tous les cas, ses « Étapes » alimentent la section « Ensuite » de `roadmap.md`, et son
+« Ce que ça ne fait pas » la section « Écarté ». Ce n'est donc pas un troisième foyer de
+l'intention : c'est la graine des deux autres.
+*Origine : skill `conception_numerique` d'un collègue, adapté le 2026-10-19.*
+
 ## Ce qui ne va PAS là
 
 | Contenu | Son vrai foyer |
