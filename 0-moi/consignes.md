@@ -261,6 +261,16 @@ est un clic pour rien. Le formulaire complet est de toute façon là juste aprè
 popups » (le « + » d'une séquence FLE), puis « se passer de la petite popup, je n'en vois
 pas l'intérêt » (création d'un point de théorie).*
 
+**Page à cards : les boutons d'action vont TOUJOURS sous la ligne de cards.**
+Dans une page qui s'ouvre sur une rangée de cards (un hub), l'ordre est fixe : titre (et
+sélecteur d'année s'il y en a un) → les cards → les boutons d'action → le contenu de la card
+ouverte. Jamais de boutons entre le titre et les cards.
+**Pourquoi** : les cards sont le menu de la page ; des boutons posés au-dessus d'elles se
+lisent comme le menu et repoussent le vrai menu sous le pli. Vécu sur la page Présence de
+KitSchool, où « Prise de présence », « Arrivée tardive »… surmontaient les cards.
+*Origine : consigne JP, session KitSchool du 2026-10-12 (`AGENTS.md` KitSchool § Conventions) ;
+recopiée ici le 2026-10-20 parce qu'elle vaut pour toute app à cards (recto-versia, pedagokitApp…).*
+
 ---
 
 ## Comment enrichir ce fichier
